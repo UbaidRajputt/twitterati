@@ -41,9 +41,11 @@ export default class StackedBarChart extends PureComponent {
   handleMouseEnter = (o) => {
     const { dataKey } = o;
     const { opacity } = this.state;
-
+    const key = Object.keys(opacity).filter( k => {
+        return k!== dataKey
+    })
     this.setState({
-      opacity: { ...opacity, [dataKey]: 0.5 },
+      opacity: { ...opacity, [key]: 0.5 },
     });
   }
 
