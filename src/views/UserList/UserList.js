@@ -25,26 +25,20 @@ export const UserList = () => {
   useEffect(() => {
     instance.get('searchPakistan')
     .then(response => {
-
-      console.log(response.data)
       setSearchData(response.data.statuses);
     });
   }, [])
 
   const handleChange = (e) => {
-    let error = e.target.parentElement.parentElement.parentElement.querySelector('.error');
     if(!e.target.value) {
       setDisabled(true)
-      //error.innerHTML = 'please type search text first';
     } else {
-     // error.innerHTML = '';
       setDisabled(false)
     }
   }
 
   const handleClick = () => {
     let search = document.getElementById('search').value;
-    console.log(search);
     instance.get(`search${search}`)
     .then(response => {
       setSearchData(response.data.statuses);
