@@ -43,7 +43,7 @@ const LatestSales = props => {
             <RefreshIcon />
           </IconButton>
         }
-        title="Latest Sales"
+        title="User Trending"
       />
       <Divider />
       <CardContent>
@@ -51,16 +51,6 @@ const LatestSales = props => {
          <StackedBarChart keyData={key}/>
         </div>
       </CardContent>
-      <Divider />
-      <CardActions className={classes.actions}>
-        <Button
-          color="primary"
-          size="small"
-          variant="text"
-        >
-          Overview <ArrowRightIcon />
-        </Button>
-      </CardActions>
     </Card>
   );
 };

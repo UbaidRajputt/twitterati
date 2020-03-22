@@ -26,12 +26,12 @@ const data = [
 ];
 
 const style = {
-  top: 0,
-  left: 350,
+  top: '100%',
+  bottom: 'auto',
   lineHeight: '24px'
 };
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div className="custom-tooltip" style={{ background: "transparent", color: "#3f51b5", fontWeight: 700, fontFamily:"Roboto Slab" }}>
@@ -49,11 +49,13 @@ const CustomTooltip = ({ active, payload, label }) => {
 export default class RadialChart extends PureComponent {
 render() {
     return (
-      <RadialBarChart key={this.props.keyData} width={600} height={440} cx={180} cy={230} innerRadius={15} outerRadius={180} barSize={30} data={data}>
-        <RadialBar minAngle={15} label={{ position: 'insideStart', fill: '#fff' }} background  dataKey="uv" />
-        <Tooltip content={<CustomTooltip/>} />
-        <Legend iconType="circle" iconSize={17} width={120} height={140} layout="vertical" verticalAlign="middle" wrapperStyle={style} />
-      </RadialBarChart>
+      <ResponsiveContainer>
+        <RadialBarChart key={this.props.keyData} innerRadius="20%" outerRadius="100%" data={data} style={{paddingRight: '100px'}} margin={{top: 0, right: 0, bottom: 0, left: 0}}>
+          <RadialBar minAngle={15} label={{ position: 'insideStart', fill: '#fff', fontSize: '10px' }} background  dataKey="uv" />
+          <Tooltip content={<CustomTooltip/>} />
+          <Legend iconType="circle" iconSize={8} layout="horizontal" verticalAlign="bottom" align="center" wrapperStyle={style} />
+        </RadialBarChart>
+      </ResponsiveContainer>
     );
   }
 }

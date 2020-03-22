@@ -67,14 +67,12 @@ export default class StackedBarChart extends PureComponent {
         key={this.props.keyData}
         data={data}
         margin={{
-          top: 20, right: 30, left: 30, bottom: 30,
+          top: 20, right: 0, left: 0, bottom: 20,
         }}
       >
         <CartesianGrid  strokeDasharray="0 0"/>
-        <XAxis dataKey="name">
-            <Label value="Pages of my website" offset={30} position="bottom" fontSize="15px" fontWeight="700" fill="#3f51b5" fontFamily="Roboto Slab" />
-        </XAxis>
-        <YAxis label={{ value: 'Pv of page', angle: -90, offset: -10, position: 'insideLeft', fontSize:"15px", fontWeight:"700", fill:"#3f51b5", fontFamily:"Roboto Slab" }}/>
+        <XAxis dataKey="name" />
+        <YAxis />
         <Tooltip />
         <Legend onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} />
         <Bar dataKey="pv" stackId="a" fill="#056677"  fillOpacity={opacity.pv}/>

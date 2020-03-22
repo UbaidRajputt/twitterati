@@ -54,7 +54,7 @@ const UsersByDevice = props => {
             <RefreshIcon />
           </IconButton>
         }
-        title="Users By Device"
+        title="Top Trending Tweets in Last Week"
       />
       <Divider />
       <CardContent>

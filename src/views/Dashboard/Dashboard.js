@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { instance } from './../../helpers/index';
 
 import {
   Budget,
@@ -9,8 +10,8 @@ import {
   TotalProfit,
   LatestSales,
   UsersByDevice,
-  LatestProducts,
-  LatestOrders
+  LatestTweetsBy,
+  LatestTweets
 } from './components/index';
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +22,15 @@ const useStyles = makeStyles(theme => ({
 
 export const Dashboard = () => {
   const classes = useStyles();
+
+  const [searchData, setSearchData] = useState(null);
+
+  useEffect(() => {
+    instance.get('searchPakistan')
+    .then(response => {
+      setSearchData(response.data.statuses);
+    });
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -89,7 +99,7 @@ export const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <LatestProducts />
+          <LatestTweetsBy statuses={searchData} />
         </Grid>
         <Grid
           item
@@ -98,7 +108,7 @@ export const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <LatestOrders />
+          <LatestTweets statuses={searchData} />
         </Grid>
       </Grid>
     </div>

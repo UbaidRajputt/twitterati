@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const UsersTable = props => {
-  const { className, users, ...rest } = props;
+  const { className, statuses, ...rest } = props;
 
   const classes = useStyles();
 
@@ -68,38 +68,37 @@ export const UsersTable = props => {
               <TableHead>
                 <TableRow>
                   <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
+                  <TableCell>Username</TableCell>
+                  <TableCell>Tweet</TableCell>
                   <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
+                  <TableCell>Date Created</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
+                {statuses.slice(0, rowsPerPage).map(status => (
                   <TableRow
                     className={classes.tableRow}
                     hover
-                    key={user.id}
+                    key={status.id}
                   >
                     <TableCell>
                       <div className={classes.nameContainer}>
                         <Avatar
                           className={classes.avatar}
-                          src={user.avatarUrl}
+                          src={status.user.profile_image_url}
                         >
-                          {getInitials(user.name)}
+                          {getInitials(status.user.name)}
                         </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
+                        <Typography variant="body1">{status.user.name}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                    <TableCell>{status.user.screen_name}</TableCell>
                     <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
+                      {status.text}
                     </TableCell>
-                    <TableCell>{user.phone}</TableCell>
+                    <TableCell>{status.user.location}</TableCell>
                     <TableCell>
-                      {moment(user.createdAt).format('DD/MM/YYYY')}
+                      {moment(status.created_at).format('DD/MM/YYYY')}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -111,7 +110,7 @@ export const UsersTable = props => {
       <CardActions className={classes.actions}>
         <TablePagination
           component="div"
-          count={users.length}
+          count={statuses.length}
           onChangePage={handlePageChange}
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}
@@ -125,7 +124,7 @@ export const UsersTable = props => {
 
 UsersTable.propTypes = {
   className: PropTypes.string,
-  users: PropTypes.array.isRequired
+  statuses: PropTypes.array.isRequired
 };
 
 export default UsersTable;
