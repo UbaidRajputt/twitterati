@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Paper, Input } from '@material-ui/core';
+import { Paper, Input, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const SearchInput = props => {
-  const { className, onChange, style, ...rest } = props;
+  const { className, handleChange, disableCheck, handleClick, style, ...rest } = props;
 
   const classes = useStyles();
 
@@ -39,9 +39,20 @@ export const SearchInput = props => {
       <Input
         {...rest}
         className={classes.input}
-        disableUnderline
-        onChange={onChange}
+        name='search'
+        id='search'
+        //disableUnderline
+        error={disableCheck}
+        onChange={handleChange}
       />
+      <Button 
+        {...rest}
+        type='button'
+        id='searchButton'
+        color='primary'
+        onClick={handleClick}
+        disabled={disableCheck}
+      >Search</Button>
     </Paper>
   );
 };
